@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>وحدة النمذجة والتقنية المعلومات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue-50:  #E6F1FB;
+    --blue-100: #B5D4F4;
+    --blue-600: #185FA5;
+    --blue-800: #0C447C;
+    --teal-50:  #E1F5EE;
+    --teal-100: #9FE1CB;
+    --teal-600: #0F6E56;
+    --amber-50: #FAEEDA;
+    --amber-600:#854F0B;
+    --purple-50:#EEEDFE;
+    --purple-600:#534AB7;
+    --gray-50:  #F4F6F8;
+    --gray-100: #E8ECF0;
+    --gray-200: #D0D7E0;
+    --gray-500: #6B7685;
+    --gray-700: #374151;
+    --gray-900: #111827;
+    --white:    #FFFFFF;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.10);
+    --ff-ar: 'Cairo', sans-serif;
+    --ff-en: 'IBM Plex Sans', sans-serif;
+  }
+
+  body {
+    background: var(--gray-50);
+    font-family: var(--ff-ar);
+    color: var(--gray-900);
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 20px;
+    min-width: 320px;
+  }
+
+  /* ── LANG SWITCHER ── */
+  .lang-bar {
+    display: flex;
+    justify-content: flex-start;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .lang-bar button {
+    font-size: 12px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--gray-200);
+    background: var(--white);
+    color: var(--gray-500);
+    cursor: pointer;
+    font-family: var(--ff-en);
+    transition: all 0.15s;
+  }
+  .lang-bar button.active {
+    background: var(--blue-600);
+    color: var(--white);
+    border-color: var(--blue-600);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-lg);
+    padding: 24px 24px 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, var(--blue-600) 0, var(--blue-600) 1px, transparent 1px, transparent 36px),
+      repeating-linear-gradient(90deg, var(--blue-600) 0, var(--blue-600) 1px, transparent 1px, transparent 36px);
+    opacity: 0.035;
+    pointer-events: none;
+  }
+  .hero-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+  }
+  .hero-icon {
+    width: 54px; height: 54px;
+    background: var(--blue-600);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .hero-icon svg { width: 30px; height: 30px; }
+  .hero-titles h1 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--gray-900);
+    line-height: 1.3;
+  }
+  .hero-titles .org {
+    font-size: 12px;
+    color: var(--gray-500);
+    margin-top: 3px;
+  }
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+    position: relative;
+  }
+  .badge {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: var(--ff-en);
+    font-weight: 500;
+  }
+  .badge.blue  { background: var(--blue-50);   color: var(--blue-800);  border: 1px solid var(--blue-100); }
+  .badge.teal  { background: var(--teal-50);   color: var(--teal-600);  border: 1px solid var(--teal-100); }
+  .badge.gray  { background: var(--gray-100);  color: var(--gray-500);  border: 1px solid var(--gray-200); }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+    position: relative;
+  }
+  .stat {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    text-align: center;
+  }
+  .stat .num { font-size: 22px; font-weight: 700; color: var(--blue-600); font-family: var(--ff-en); }
+  .stat .lbl { font-size: 11px; color: var(--gray-500); margin-top: 3px; }
+
+  /* ── GRID LAYOUT ── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .grid-1 { margin-bottom: 14px; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--gray-100);
+    margin-bottom: 14px;
+  }
+  .card-header i { font-size: 18px; color: var(--blue-600); }
+  .card-header h2 { font-size: 14px; font-weight: 600; flex: 1; }
+  .card-header .meta { font-size: 11px; color: var(--gray-500); }
+
+  /* ── ABOUT ── */
+  .about-text { font-size: 13px; color: var(--gray-500); line-height: 1.8; }
+  .goals { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+  .goal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gray-50);
+    border-radius: var(--radius-sm);
+    padding: 7px 10px;
+    font-size: 12px;
+    color: var(--gray-700);
+    border: 1px solid var(--gray-100);
+  }
+  .goal i { font-size: 14px; color: var(--teal-600); flex-shrink: 0; }
+
+  /* ── SERVICES ── */
+  .svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .svc {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-md);
+    padding: 12px;
+  }
+  .svc i { font-size: 20px; color: var(--blue-600); display: block; margin-bottom: 6px; }
+  .svc .st { font-size: 12px; font-weight: 600; color: var(--gray-900); }
+  .svc .sd { font-size: 11px; color: var(--gray-500); margin-top: 3px; line-height: 1.5; }
+
+  /* ── TOOLS ── */
+  .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .tool {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-md);
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .tool i { font-size: 22px; color: var(--blue-600); display: block; }
+  .tool .tn { font-size: 11px; font-weight: 600; margin-top: 5px; font-family: var(--ff-en); }
+  .tool .tc { font-size: 10px; color: var(--gray-500); margin-top: 2px; font-family: var(--ff-en); }
+
+  /* ── TEAM ── */
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .member {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-md);
+    padding: 9px 11px;
+  }
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .av-blue   { background: var(--blue-50);   color: var(--blue-800); }
+  .av-teal   { background: var(--teal-50);   color: var(--teal-600); }
+  .av-amber  { background: var(--amber-50);  color: var(--amber-600);}
+  .av-purple { background: var(--purple-50); color: var(--purple-600);}
+  .member .mn { font-size: 12px; font-weight: 600; }
+  .member .mr { font-size: 11px; color: var(--gray-500); }
+
+  /* ── REPORTS ── */
+  .reports { display: flex; flex-direction: column; gap: 6px; }
+  .report {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-md);
+    padding: 9px 12px;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .report:hover { border-color: var(--blue-100); box-shadow: var(--shadow-sm); }
+  .report i { font-size: 16px; color: var(--blue-600); flex-shrink: 0; }
+  .report .rt { font-size: 12px; font-weight: 500; flex: 1; color: var(--gray-700); }
+  .report .rd { font-size: 11px; color: var(--gray-500); white-space: nowrap; }
+  .pill {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    font-family: var(--ff-en);
+    font-weight: 500;
+  }
+  .pill-new  { background: var(--teal-50);  color: var(--teal-600);  border: 1px solid var(--teal-100); }
+  .pill-pdf  { background: var(--blue-50);  color: var(--blue-800);  border: 1px solid var(--blue-100); }
+  .pill-pbi  { background: var(--amber-50); color: var(--amber-600); border: 1px solid #FAC775; }
+  .pill-rep  { background: var(--gray-100); color: var(--gray-500);  border: 1px solid var(--gray-200); }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+  }
+  .contact-item i { font-size: 18px; color: var(--blue-600); flex-shrink: 0; }
+  .contact-item .cl { font-size: 11px; color: var(--gray-500); }
+  .contact-item .cv { font-size: 12px; font-weight: 600; margin-top: 2px; color: var(--gray-900); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--gray-500);
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px solid var(--gray-100);
+  }
+
+  /* ── RTL / LTR ── */
+  body.ltr {
+    direction: ltr;
+    font-family: var(--ff-en);
+  }
+  body.ltr .lang-bar { justify-content: flex-end; }
+  body.ltr .hero-top { flex-direction: row; }
+  body.ltr .member   { flex-direction: row; }
+  body.ltr .contact-item { flex-direction: row; }
+  body.ltr .goal     { flex-direction: row; }
+  body.ltr .report   { flex-direction: row; }
+  body.ltr .card-header { flex-direction: row; }
+
+  body.rtl .card-header { flex-direction: row-reverse; }
+  body.rtl .hero-top    { flex-direction: row-reverse; text-align: right; }
+  body.rtl .member      { flex-direction: row-reverse; text-align: right; }
+  body.rtl .contact-item{ flex-direction: row-reverse; text-align: right; }
+  body.rtl .goal        { flex-direction: row-reverse; }
+  body.rtl .report      { flex-direction: row-reverse; text-align: right; }
+  body.rtl .svc         { text-align: right; }
+  body.rtl .hero-badges { flex-direction: row-reverse; }
+  body.rtl .lang-bar    { justify-content: flex-start; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 580px) {
+    .grid-2, .svc-grid, .team-grid, .contact-grid { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    body { padding: 12px; }
+  }
+</style>
+</head>
+<body class="rtl" id="body">
+
+<!-- LANG SWITCHER -->
+<div class="lang-bar">
+  <button class="active" onclick="setLang('ar')">العربية</button>
+  <button onclick="setLang('en')">English</button>
+</div>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-icon">
+      <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="15" cy="15" r="13" stroke="white" stroke-width="1.4"/>
+        <path d="M4 15 Q15 4 26 15 Q15 26 4 15Z" stroke="white" stroke-width="1.4" fill="none"/>
+        <circle cx="15" cy="15" r="2.8" fill="white"/>
+        <line x1="15" y1="2" x2="15" y2="28" stroke="white" stroke-width="1" stroke-dasharray="2 2"/>
+        <line x1="2" y1="15" x2="28" y2="15" stroke="white" stroke-width="1" stroke-dasharray="2 2"/>
+      </svg>
+    </div>
+    <div class="hero-titles">
+      <h1 id="heroTitle">وحدة النمذجة والتقنية المعلومات</h1>
+      <div class="org" id="heroOrg">مركز بحوث النفط — ليبيا للنفط</div>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <span class="badge blue">ArcGIS Pro</span>
+    <span class="badge blue">QGIS</span>
+    <span class="badge blue">Power BI</span>
+    <span class="badge teal">Python</span>
+    <span class="badge teal">SQL Server</span>
+    <span class="badge gray">Google Earth Engine</span>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="num">8,850+</div><div class="lbl" id="s1">سجل بئر محلل</div></div>
+    <div class="stat"><div class="num">15+</div><div class="lbl" id="s2">مشروع نشط</div></div>
+    <div class="stat"><div class="num">2D/3D</div><div class="lbl" id="s3">نماذج جيومكانية</div></div>
+  </div>
+</div>
+
+<!-- ══ ROW 1 ══ -->
+<div class="grid-2">
+
+  <!-- ABOUT -->
+  <div class="card">
+    <div class="card-header">
+      <i class="ti ti-info-circle"></i>
+      <h2 id="aboutH">نبذة عن الوحدة</h2>
+    </div>
+    <p class="about-text" id="aboutTxt">تعمل الوحدة على توظيف أحدث تقنيات نظم المعلومات الجغرافية والنمذجة الحاسوبية لدعم قرارات الاستكشاف والإنتاج النفطي في ليبيا.</p>
+    <div class="goals">
+      <div class="goal"><i class="ti ti-target"></i><span id="g1">بناء قواعد البيانات الجيومكانية للحقول النفطية</span></div>
+      <div class="goal"><i class="ti ti-chart-line"></i><span id="g2">تحليل بيانات الآبار وإنتاج التقارير التنفيذية</span></div>
+      <div class="goal"><i class="ti ti-cpu"></i><span id="g3">تطوير نماذج محاكاة المكامن</span></div>
+      <div class="goal"><i class="ti ti-presentation-analytics"></i><span id="g4">دعم صنع القرار بلوحات بيانات تفاعلية</span></div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="card">
+    <div class="card-header">
+      <i class="ti ti-briefcase"></i>
+      <h2 id="svcH">الخدمات والمشاريع</h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc"><i class="ti ti-map"></i><div class="st" id="sv1t">خرائط GIS</div><div class="sd" id="sv1d">إنتاج خرائط تحليلية للحقول والآبار</div></div>
+      <div class="svc"><i class="ti ti-chart-dots"></i><div class="st" id="sv2t">نمذجة البيانات</div><div class="sd" id="sv2d">نماذج إحصائية وجيو-إحصائية للمكامن</div></div>
+      <div class="svc"><i class="ti ti-dashboard"></i><div class="st" id="sv3t">لوحات تحليلية</div><div class="sd" id="sv3d">لوحات Power BI للإدارة التنفيذية</div></div>
+      <div class="svc"><i class="ti ti-database"></i><div class="st" id="sv4t">قواعد البيانات</div><div class="sd" id="sv4d">تصميم وإدارة قواعد بيانات النفط</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ ROW 2 ══ -->
+<div class="grid-2">
+
+  <!-- TOOLS -->
+  <div class="card">
+    <div class="card-header">
+      <i class="ti ti-tool"></i>
+      <h2 id="toolsH">الأدوات والتقنيات</h2>
+    </div>
+    <div class="tools-grid">
+      <div class="tool"><i class="ti ti-layers-intersect"></i><div class="tn">ArcGIS Pro</div><div class="tc">GIS Platform</div></div>
+      <div class="tool"><i class="ti ti-world"></i><div class="tn">QGIS</div><div class="tc">Open Source GIS</div></div>
+      <div class="tool"><i class="ti ti-chart-bar"></i><div class="tn">Power BI</div><div class="tc">Analytics</div></div>
+      <div class="tool"><i class="ti ti-brand-python"></i><div class="tn">Python</div><div class="tc">Data Science</div></div>
+      <div class="tool"><i class="ti ti-database"></i><div class="tn">SQL Server</div><div class="tc">Database</div></div>
+      <div class="tool"><i class="ti ti-satellite"></i><div class="tn">Google Earth Engine</div><div class="tc">Remote Sensing</div></div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="card">
+    <div class="card-header">
+      <i class="ti ti-users"></i>
+      <h2 id="teamH">فريق العمل</h2>
+      <span class="meta" id="teamMeta">وحدة النمذجة والتقنية المعلومات</span>
+    </div>
+    <div class="team-grid">
+      <div class="member"><div class="avatar av-blue" id="av1">خ.ع</div><div><div class="mn" id="m1n">خالد العربش</div><div class="mr" id="m1r">رئيس الوحدة</div></div></div>
+      <div class="member"><div class="avatar av-teal" id="av2">م.ب</div><div><div class="mn" id="m2n">محلل GIS</div><div class="mr" id="m2r">نظم معلومات جغرافية</div></div></div>
+      <div class="member"><div class="avatar av-amber" id="av3">م.ن</div><div><div class="mn" id="m3n">مختص نمذجة</div><div class="mr" id="m3r">نمذجة المكامن</div></div></div>
+      <div class="member"><div class="avatar av-purple" id="av4">م.ت</div><div><div class="mn" id="m4n">مطور تقنية</div><div class="mr" id="m4r">تطوير البيانات</div></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ REPORTS ══ -->
+<div class="grid-1">
+  <div class="card">
+    <div class="card-header">
+      <i class="ti ti-file-analytics"></i>
+      <h2 id="repH">أحدث التقارير والإصدارات</h2>
+      <span class="meta">2024 – 2025</span>
+    </div>
+    <div class="reports">
+      <div class="report"><i class="ti ti-file-spreadsheet"></i><div class="rt" id="r1">تقرير تحليل بيانات الآبار الاستكشافية — ليبيا 2025</div><div class="rd">مارس 2025</div><span class="pill pill-new" id="r1p">جديد</span></div>
+      <div class="report"><i class="ti ti-map-2"></i><div class="rt" id="r2">خريطة التوزيع الجيومكاني للحقول النفطية</div><div class="rd">يناير 2025</div><span class="pill pill-pdf">PDF</span></div>
+      <div class="report"><i class="ti ti-chart-area"></i><div class="rt" id="r3">لوحة بيانات الإنتاج التنفيذية — Q4 2024</div><div class="rd">ديسمبر 2024</div><span class="pill pill-pbi">Power BI</span></div>
+      <div class="report"><i class="ti ti-file-text"></i><div class="rt" id="r4">تقرير نمذجة المكامن — حوض سرت</div><div class="rd">أكتوبر 2024</div><span class="pill pill-rep" id="r4p">تقرير</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONTACT ══ -->
+<div class="grid-1">
+  <div class="card">
+    <div class="card-header">
+      <i class="ti ti-address-book"></i>
+      <h2 id="ctH">بيانات الاتصال</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-item"><i class="ti ti-mail"></i><div><div class="cl" id="ct1l">البريد الإلكتروني</div><div class="cv">k.alarbesh@prclibya.com</div></div></div>
+      <div class="contact-item"><i class="ti ti-building"></i><div><div class="cl" id="ct2l">المؤسسة</div><div class="cv" id="ct2v">مركز بحوث النفط — طرابلس</div></div></div>
+      <div class="contact-item"><i class="ti ti-world"></i><div><div class="cl" id="ct3l">الموقع الإلكتروني</div><div class="cv">prclibya.com</div></div></div>
+      <div class="contact-item"><i class="ti ti-map-pin"></i><div><div class="cl" id="ct4l">الموقع</div><div class="cv" id="ct4v">طرابلس، ليبيا</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer" id="footer">
+  مركز بحوث النفط &nbsp;·&nbsp; وحدة النمذجة والتقنية المعلومات &nbsp;·&nbsp; 2025
+</div>
+
+<script>
+const T = {
+  ar: {
+    heroTitle:'وحدة النمذجة والتقنية المعلومات', heroOrg:'مركز بحوث النفط — ليبيا للنفط',
+    s1:'سجل بئر محلل', s2:'مشروع نشط', s3:'نماذج جيومكانية',
+    aboutH:'نبذة عن الوحدة',
+    aboutTxt:'تعمل الوحدة على توظيف أحدث تقنيات نظم المعلومات الجغرافية والنمذجة الحاسوبية لدعم قرارات الاستكشاف والإنتاج النفطي في ليبيا.',
+    g1:'بناء قواعد البيانات الجيومكانية للحقول النفطية',
+    g2:'تحليل بيانات الآبار وإنتاج التقارير التنفيذية',
+    g3:'تطوير نماذج محاكاة المكامن',
+    g4:'دعم صنع القرار بلوحات بيانات تفاعلية',
+    svcH:'الخدمات والمشاريع',
+    sv1t:'خرائط GIS', sv1d:'إنتاج خرائط تحليلية للحقول والآبار',
+    sv2t:'نمذجة البيانات', sv2d:'نماذج إحصائية وجيو-إحصائية للمكامن',
+    sv3t:'لوحات تحليلية', sv3d:'لوحات Power BI للإدارة التنفيذية',
+    sv4t:'قواعد البيانات', sv4d:'تصميم وإدارة قواعد بيانات النفط',
+    toolsH:'الأدوات والتقنيات',
+    teamH:'فريق العمل', teamMeta:'وحدة النمذجة والتقنية المعلومات',
+    m1n:'خالد العربش', m1r:'رئيس الوحدة', av1:'خ.ع',
+    m2n:'محلل GIS', m2r:'نظم معلومات جغرافية', av2:'م.ب',
+    m3n:'مختص نمذجة', m3r:'نمذجة المكامن', av3:'م.ن',
+    m4n:'مطور تقنية', m4r:'تطوير البيانات', av4:'م.ت',
+    repH:'أحدث التقارير والإصدارات',
+    r1:'تقرير تحليل بيانات الآبار الاستكشافية — ليبيا 2025', r1p:'جديد',
+    r2:'خريطة التوزيع الجيومكاني للحقول النفطية',
+    r3:'لوحة بيانات الإنتاج التنفيذية — Q4 2024',
+    r4:'تقرير نمذجة المكامن — حوض سرت', r4p:'تقرير',
+    ctH:'بيانات الاتصال',
+    ct1l:'البريد الإلكتروني', ct2l:'المؤسسة', ct2v:'مركز بحوث النفط — طرابلس',
+    ct3l:'الموقع الإلكتروني', ct4l:'الموقع', ct4v:'طرابلس، ليبيا',
+    footer:'مركز بحوث النفط · وحدة النمذجة والتقنية المعلومات · 2025'
+  },
+  en: {
+    heroTitle:'Modelling & IT Unit', heroOrg:'Petroleum Research Centre — Libyan Petroleum',
+    s1:'Well Records Analysed', s2:'Active Projects', s3:'Geospatial Models',
+    aboutH:'About the Unit',
+    aboutTxt:'The Unit applies advanced GIS and computational modelling technologies to support exploration and production decisions across Libya.',
+    g1:'Build geospatial databases for oilfield assets',
+    g2:'Analyse well data and produce executive reports',
+    g3:'Develop reservoir simulation models',
+    g4:'Support decisions with interactive dashboards',
+    svcH:'Services & Projects',
+    sv1t:'GIS Mapping', sv1d:'Analytical maps of fields and wells',
+    sv2t:'Data Modelling', sv2d:'Statistical & geo-statistical reservoir models',
+    sv3t:'Analytics Dashboards', sv3d:'Power BI dashboards for executives',
+    sv4t:'Databases', sv4d:'Design and manage petroleum databases',
+    toolsH:'Tools & Technologies',
+    teamH:'Team', teamMeta:'Modelling & IT Unit',
+    m1n:'Khaled Alarbesh', m1r:'Unit Head', av1:'KA',
+    m2n:'GIS Analyst', m2r:'Geographic Information Systems', av2:'GA',
+    m3n:'Modelling Specialist', m3r:'Reservoir Modelling', av3:'MS',
+    m4n:'Technology Developer', m4r:'Data Development', av4:'TD',
+    repH:'Latest Reports & Publications',
+    r1:'Exploratory Well Data Analysis Report — Libya 2025', r1p:'New',
+    r2:'Geospatial Distribution Map of Oilfields',
+    r3:'Executive Production Dashboard — Q4 2024',
+    r4:'Reservoir Modelling Report — Sirte Basin', r4p:'Report',
+    ctH:'Contact Information',
+    ct1l:'Email', ct2l:'Organisation', ct2v:'Petroleum Research Centre — Tripoli',
+    ct3l:'Website', ct4l:'Location', ct4v:'Tripoli, Libya',
+    footer:'Petroleum Research Centre · Modelling & IT Unit · 2025'
+  }
+};
+
+function setLang(lang) {
+  const b = document.getElementById('body');
+  b.className = lang === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-bar button').forEach((btn, i) => {
+    btn.classList.toggle('active', (i===0 && lang==='ar') || (i===1 && lang==='en'));
+  });
+  const d = T[lang];
+  Object.keys(d).forEach(k => {
+    const el = document.getElementById(k);
+    if (el) el.textContent = d[k];
+  });
+}
+</script>
+</body>
+</html>
