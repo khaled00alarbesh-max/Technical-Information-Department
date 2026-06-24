@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Information Department</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f6f7;
+    padding: 1.5rem;
+    color: #1a1a2e;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: #0A2540;
+    border-radius: 14px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0,180,216,0.15);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 30px; right: 30px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,180,216,0.08);
+    pointer-events: none;
+  }
+  .hero-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 1.25rem;
+  }
+  .dept-icon {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    background: rgba(0,180,216,0.18);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .dept-icon i { font-size: 26px; color: #00B4D8; }
+  .hero-title {
+    font-size: 20px; font-weight: 600;
+    color: #ffffff; letter-spacing: -0.3px;
+  }
+  .hero-subtitle {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 3px;
+  }
+  .hero-stats {
+    display: flex; gap: 2rem;
+    border-top: 0.5px solid rgba(255,255,255,0.1);
+    padding-top: 1.2rem;
+  }
+  .stat-num { font-size: 20px; font-weight: 600; color: #00B4D8; display: block; }
+  .stat-label { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.6px; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 10px; font-weight: 500;
+    color: #888; text-transform: uppercase;
+    letter-spacing: 0.8px; margin-bottom: 0.75rem;
+  }
+
+  /* ── FOLDER CARDS ── */
+  .folders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+  .folder-card {
+    background: #ffffff;
+    border: 0.5px solid #e2e4e9;
+    border-radius: 12px;
+    padding: 1rem 1rem 0.9rem;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
+  }
+  .folder-card:hover {
+    border-color: #b0b8c9;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    transform: translateY(-1px);
+  }
+  .folder-icon {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0.8rem; font-size: 20px;
+  }
+  .fi-blue   { background: #E6F1FB; color: #185FA5; }
+  .fi-teal   { background: #E1F5EE; color: #0F6E56; }
+  .fi-amber  { background: #FAEEDA; color: #854F0B; }
+  .fi-green  { background: #EAF3DE; color: #3B6D11; }
+  .fi-purple { background: #EEEDFE; color: #534AB7; }
+  .fi-coral  { background: #FAECE7; color: #993C1D; }
+  .fi-navy   { background: #e8eef6; color: #0A2540; }
+  .fi-gray   { background: #f0f1f3; color: #5F5E5A; }
+
+  .folder-name {
+    font-size: 13px; font-weight: 500;
+    color: #1a1a2e; line-height: 1.35; margin-bottom: 4px;
+  }
+  .folder-meta { font-size: 11px; color: #888; }
+
+  /* ── QUICK ACCESS ── */
+  .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 10px;
+  }
+  .quick-card {
+    background: #ffffff;
+    border: 0.5px solid #e2e4e9;
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    display: flex; align-items: center; gap: 11px;
+    text-decoration: none;
+    transition: background 0.13s, border-color 0.13s;
+  }
+  .quick-card:hover { background: #f8f9fb; border-color: #b0b8c9; }
+  .quick-card i { font-size: 18px; color: #888; flex-shrink: 0; }
+  .quick-info { flex: 1; }
+  .quick-title { font-size: 13px; font-weight: 500; color: #1a1a2e; }
+  .quick-sub   { font-size: 11px; color: #888; margin-top: 2px; }
+  .arrow-i     { font-size: 13px; color: #bbb; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="dept-icon"><i class="ti ti-building-office"></i></div>
+    <div>
+      <div class="hero-title">Technical Information Department</div>
+      <div class="hero-subtitle">Petroleum Research Centre &nbsp;·&nbsp; Document Portal</div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div><span class="stat-num">8</span><span class="stat-label">Folders</span></div>
+    <div><span class="stat-num">12</span><span class="stat-label">Members</span></div>
+    <div><span class="stat-num">Private</span><span class="stat-label">Access</span></div>
+  </div>
+</div>
+
+<!-- ── DOCUMENT LIBRARY ── -->
+<p class="section-label">Document Library</p>
+<div class="folders-grid">
+
+  <a class="folder-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FTechnicalInformationDepartment%2FShared%20Documents%2F01_GIS%20Unit" target="_blank">
+    <div class="folder-icon fi-blue"><i class="ti ti-map-2"></i></div>
+    <div class="folder-name">GIS Unit</div>
+    <div class="folder-meta">01 · Maps &amp; spatial data</div>
+  </a>
+
+  <a class="folder-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FTechnicalInformationDepartment%2FShared%20Documents%2F02_Scanning%20and%20Digitization%20Unit" target="_blank">
+    <div class="folder-icon fi-teal"><i class="ti ti-scan"></i></div>
+    <div class="folder-name">Scanning &amp; Digitization Unit</div>
+    <div class="folder-meta">02 · Digitized records</div>
+  </a>
+
+  <a class="folder-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FTechnicalInformationDepartment%2FShared%20Documents%2F03_PRC" target="_blank">
+    <div class="folder-icon fi-amber"><i class="ti ti-flask"></i></div>
+    <div class="folder-name">PRC</div>
+    <div class="folder-meta">03 · Research centre files</div>
+  </a>
+
+  <a class="folder-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FTechnicalInformationDepartment%2FShared%20Documents%2F04_Company" target="_blank">
+    <div class="folder-icon fi-green"><i class="ti ti-building"></i></div>
+    <div class="folder-name">Company</div>
+    <div class="folder-meta">04 · Corporate documents</div>
+  </a>
+
+  <a class="folder-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FTechnicalInformationDepartment%2FShared%20Documents%2F05_Team%20Task" target="_blank">
+    <div class="folder-icon fi-purple"><i class="ti ti-checklist"></i></div>
+    <div class="folder-name">Team Task</div>
+    <div class="folder-meta">05 · Tasks &amp; assignments</div>
+  </a>
+
+  <a class="folder-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FTechnicalInformationDepartment%2FShared%20Documents%2FData" target="_blank">
+    <div class="folder-icon fi-coral"><i class="ti ti-database"></i></div>
+    <div class="folder-name">Data</div>
+    <div class="folder-meta">Datasets &amp; raw files</div>
+  </a>
+
+  <a class="folder-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FTechnicalInformationDepartment%2FShared%20Documents%2FTechnical%20Information%20Department" target="_blank">
+    <div class="folder-icon fi-navy"><i class="ti ti-folder-open"></i></div>
+    <div class="folder-name">Technical Information Department</div>
+    <div class="folder-meta">General department files</div>
+  </a>
+
+  <a class="folder-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FTechnicalInformationDepartment%2FShared%20Documents%2FTIS_ISO" target="_blank">
+    <div class="folder-icon fi-gray"><i class="ti ti-certificate"></i></div>
+    <div class="folder-name">TIS_ISO</div>
+    <div class="folder-meta">ISO standards &amp; compliance</div>
+  </a>
+
+</div>
+
+<!-- ── QUICK ACCESS ── -->
+<p class="section-label">Quick Access</p>
+<div class="quick-grid">
+
+  <a class="quick-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment/Shared%20Documents/Forms/AllItems.aspx" target="_blank">
+    <i class="ti ti-files"></i>
+    <div class="quick-info">
+      <div class="quick-title">All Documents</div>
+      <div class="quick-sub">Full library view</div>
+    </div>
+    <i class="ti ti-arrow-right arrow-i"></i>
+  </a>
+
+  <a class="quick-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment/_layouts/15/sharepoint.aspx" target="_blank">
+    <i class="ti ti-clock"></i>
+    <div class="quick-info">
+      <div class="quick-title">Recent Documents</div>
+      <div class="quick-sub">Last 7 days activity</div>
+    </div>
+    <i class="ti ti-arrow-right arrow-i"></i>
+  </a>
+
+  <a class="quick-card" href="https://libyalpi.sharepoint.com/sites/TechnicalInformationDepartment" target="_blank">
+    <i class="ti ti-home"></i>
+    <div class="quick-info">
+      <div class="quick-title">Site Home</div>
+      <div class="quick-sub">Department main page</div>
+    </div>
+    <i class="ti ti-arrow-right arrow-i"></i>
+  </a>
+
+</div>
+
+</body>
+</html>
